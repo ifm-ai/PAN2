@@ -1,0 +1,10 @@
+PAN 2
+Copyright 2026 Mohamed bin Zayed University of Artificial Intelligence (MBZUAI)
+Developed by the Institute of Foundation Models (IFM) at MBZUAI
+
+This product includes or is used with the following third-party components, each licensed under the terms set out in THIRD_PARTY_LICENSES:
+- Wan 2.2, Copyright 2024-2025 The Alibaba Wan Team Authors, licensed under the Apache License, Version 2.0
+- Qwen (Qwen3.5-9B), Copyright 2026 Alibaba Cloud, licensed under the Apache License, Version 2.0
+- Diffusers, Copyright 2025 Stability AI, Katherine Crowson, HuggingFace Inc. and The HuggingFace Team, licensed under the Apache License, Version 2.0
+
+The names of the third-party components and their owners are used solely to identify the origin of those components and do not imply any endorsement of PAN 2.

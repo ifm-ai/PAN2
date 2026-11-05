@@ -1,0 +1,216 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+wandb
+pretrained_model_root
+test_dataloader
+test_code/
+/tests/
+tools/
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# Model checkpoints and outputs
+outputs/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+outputs*
+
+# Generated videos and images
+*.mp4
+*.avi
+*.mov
+*.gif
+*.png
+*.jpg
+*.jpeg
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+logs_*
+
+# Cache directories
+.cache/
+cache/
+ckpts/
+
+# Git worktrees
+.worktrees/
+
+
+nsys-reports/
+triton/
+fsdp_test/
+.codex
+tests/
+inductor/
+compiled_cache.db
+torch_compile_debug/
+
+# Local training prompt dumps / sample outputs (not for VCS)
+training_samples/
+training_prompts_*.txt
+ckps/
+.gradio/
+
+# README wordmark and media are tracked (LFS via .gitattributes)
+!assets/**
+!assets/**/*.png
+!assets/**/*.jpg
+!assets/**/*.gif
+!assets/**/*.mp4
+
+# i2v reference image of the shipped example prompts
+!inference/prompts/*.jpg
+
+# Local-only configs and launch scripts
+config/local/
+scripts/local/
+
+# local copies of the tech report
+PAN_v2_Tech_Report.pdf
+PAN_v2_Tech_Report (1).zip
+
+# Synthetic data written by scripts/make_sample_data.py
+/sample_data/

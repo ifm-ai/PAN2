@@ -1,0 +1,101 @@
+# SFT: identical architecture to config/pretrain_29B_720p.yaml, warm
+# started from a pretraining checkpoint. Only the model init, data and output
+# sections differ from the pretrain config.
+model:
+  pretrained_transformer_path: /path/to/pretrain_checkpoint
+  load_transformer_weights: true
+  text_encoder_hidden_state_skip_layer: 2
+  zero_init_modulation: true
+  transformer_config_overrides:
+    # ---- tokens / latents
+    patch_size: [1, 2, 2]
+    in_channels: 97            # Wan 2.2: 48 noisy + 48 condition + 1 condition mask
+    out_channels: 48
+    # ---- backbone
+    hidden_size: 4096
+    num_attention_heads: 32
+    num_layers: 44
+    ffn_activation: gelu_tanh
+    mlp_ratio: 8.0             # video-token FFN width / hidden_size
+    context_mlp_ratio: 4.0     # text-token FFN width / hidden_size
+    # ---- attention
+    attention_backend: flash
+    mask_text_padding: true
+    normalize_qk: true
+    qk_norm_kind: rms
+    # ---- rotary positions
+    rope_axes_dim: [16, 56, 56]
+    rope_theta: 256
+    # Frame positions are scaled by reference fps / data fps = 16 / 24.
+    rope_temporal_scale: 0.6666666666666666
+    # ---- text conditioning
+    text_embed_dim: 4096
+    text_modulation_timestep_dependent: false
+    # A learned vector added to every text token; checkpoints store it as row 0 of
+    # text_type_embedding.weight (3, hidden).
+    use_text_type_embedding: true
+
+
+
+training:
+  batch_size: 1
+  learning_rate: 0.00002
+  max_steps: 20000
+  warmup_steps: 500
+  lr_scheduler_type: cosine_decay
+  lr_warmup_start_ratio: 0.0
+  lr_decay_steps: 19500
+  lr_decay_floor_ratio: 0.05
+  max_grad_norm: 1.0
+  use_muon: true
+  # Must remain true: disabling selects an unvalidated execution path.
+  # Preserves the validated eager training behavior; no CUDA graph capture.
+  legacy_eager_mode: true
+
+
+
+diffusion:
+  flow_snr_type: uniform
+  flow_lognorm_loc: 0.0
+  flow_lognorm_scale: 1.0
+  train_timestep_shift: 9.0
+  train_timestep_shift_mode: fixed
+
+
+data:
+  # SFT video CSVs (latent_path + caption per row). Point at the curated set.
+  packed_dataloader_meta_csv_path:
+    - /path/to/csvs/
+  packed_dataloader_num_buffers: 8
+  packed_dataloader_prefetch_factor: 4
+  packed_joint_token_budget: 110576
+  packed_video_token_budget: 109142
+  packed_caption_token_budget: 4096
+  packed_dataloader_max_num_seq: 8
+  packed_caption_segment_limit: 1536
+  packed_joint_segment_limit: 109142
+  # Image-latent tar shards (any resolution) interleaved with the video stream.
+  # Each entry may be a directory of .tar files, a .tar file, or a text file
+  # listing either. Set image_sample_prob to 0 to disable mixing.
+  image_tar_path:
+    - /path/to/image_tars/
+  image_sample_prob: 0.0
+
+tasks:
+  image_cond_prob: 0.3
+  video_cond_prob: 0
+  cfg_drop_prob: 0.05
+  conditioning_schema: channel_concat
+
+distributed:
+  hybrid_shard: true
+  enable_gradient_checkpointing: true
+  use_dedicated_gradient_checkpointing: false
+  cp_size: 4
+
+output:
+  output_dir: /path/to/output/sft
+  report_to: none
+  log_interval: 1
+  save_total_limit: 50
+  save_interval: 500

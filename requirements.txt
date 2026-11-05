@@ -1,0 +1,48 @@
+# Pinned to the `video_cp` conda env (Python 3.14.4, CUDA 13.2) on 2026-10-06.
+# Direct dependencies only; transitive packages come along automatically.
+#
+# Install order matters for the CUDA stack:
+#   pip install torch==2.12.1 torchvision==0.27.1 \
+#       --index-url https://download.pytorch.org/whl/cu132
+#   pip install --pre "flash-attn-4[cu13]==4.0.0b29" --no-build-isolation
+#   pip install "quack-kernels[cu13]==0.6.4"
+#   pip install -r requirements.txt
+# See README.md "Compatibility" for the FA4 / quack upgrade contract
+# (quack-kernels >= 0.6.3 is checked at import in pan/models/transformers/modules/mlp_ops.py).
+
+# ---- core (CUDA 13.2 builds; install from the PyTorch cu132 index first, see above)
+torch==2.12.1
+torchvision==0.27.1
+triton==3.7.1
+
+# ---- attention / gemm kernels (FA4 is pre-release; see install order above)
+flash-attn-4==4.0.0b29
+quack-kernels==0.6.4
+nvidia-cutlass-dsl==4.6.2
+
+# ---- models
+transformers==5.13.0
+diffusers==0.38.0
+safetensors==0.8.0
+huggingface_hub==1.12.0
+accelerate==1.13.0
+tokenizers==0.22.2
+sentencepiece==0.2.1
+tiktoken==0.12.0
+qwen-vl-utils==0.0.14
+einops==0.8.2
+
+# ---- data / io
+numpy==2.4.6
+pillow==12.2.0
+imageio==2.37.3
+imageio-ffmpeg==0.6.0
+
+# ---- config / logging / misc
+omegaconf==2.3.0
+PyYAML==6.0.3
+loguru==0.7.3
+wandb==0.26.1
+ninja==1.13.0
+
+# ---- optional, not installed in video_cp (imports are guarded)

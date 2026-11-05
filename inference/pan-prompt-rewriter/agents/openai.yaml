@@ -1,0 +1,4 @@
+interface:
+  display_name: "PAN2 Prompt Rewriter"
+  short_description: "T2V/I2V prompts with fixed no-actor-ID negative"
+  default_prompt: "Use $pan-prompt-rewriter to rewrite this video request and return both refined_prompt and negative_prompt."
